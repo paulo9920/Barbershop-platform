@@ -13,29 +13,30 @@ datasource db {
 model User {
   id      String    @id @default(uuid())
   name    String
-  bookings booking[]
+  Booking Booking[]
 }
 
 model Barbershop {
   id       String    @id @default(uuid())
   name     String
-  adress   String
+  address  String
   imageUrl String
-  Services  Service[]
-  bookings  booking[]
+  Service  Service[]
+  Booking  Booking[]
 }
 
 model Service {
   id           String     @id @default(uuid())
   name         String
   price        Decimal    @db.Decimal(10, 2)
-  BarbershopId String
-  barbershop   Barbershop @relation(fields: [BarbershopId], references: [id])
+  barbershopId String
+  barbershop   Barbershop @relation(fields: [barbershopId], references: [id])
   description  String
-  bookings      booking[]
+  bookings     Booking[]
+  imageUrl     String
 }
 
-model booking {
+model Booking {
   id           String     @id @default(uuid())
   userId       String
   user         User       @relation(fields: [userId], references: [id])
